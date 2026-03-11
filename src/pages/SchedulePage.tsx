@@ -4,16 +4,16 @@ import {
   Chip, Button, Divider, ToggleButtonGroup, ToggleButton,
   Select, MenuItem, FormControl, InputLabel,
 } from '@mui/material'
-import { schedules } from '../data/schedules'
+import { schedules, Schedule } from '../data/schedules'
 import { cinemas } from '../data/cinemas'
 
-function dateStr(offsetDays) {
+function dateStr(offsetDays: number): string {
   const d = new Date()
   d.setDate(d.getDate() + offsetDays)
   return d.toISOString().split('T')[0]
 }
 
-function formatDateLabel(dateStr) {
+function formatDateLabel(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00')
   const today = new Date()
   today.setHours(0, 0, 0, 0)
@@ -25,7 +25,7 @@ function formatDateLabel(dateStr) {
   return `${dayName} · ${label}`
 }
 
-function formatTime(datetimeStr) {
+function formatTime(datetimeStr: string): string {
   return new Date(datetimeStr).toLocaleTimeString('id-ID', {
     hour: '2-digit',
     minute: '2-digit',
@@ -35,7 +35,7 @@ function formatTime(datetimeStr) {
 export default function SchedulePage() {
   const dateOptions = useMemo(() => [dateStr(0), dateStr(1), dateStr(2)], [])
   const [date, setDate] = useState(dateOptions[0])
-  const [cinemaFilter, setCinemaFilter] = useState('')
+  const [cinemaFilter, setCinemaFilter] = useState<number | ''>('')
 
   const filtered = schedules.filter((sc) => {
     const scDate = sc.start_time.split('T')[0]
@@ -45,8 +45,8 @@ export default function SchedulePage() {
   })
 
   // Group by cinema
-  const byCinema = filtered.reduce((acc, sc) => {
-    const key = sc.cinema_name
+  const byCinema = filtered.reduce<Record<string, Schedule[]>>((acc, sc) => {
+    const key = sc.cinema_name ?? 'Unknown'
     if (!acc[key]) acc[key] = []
     acc[key].push(sc)
     return acc
@@ -78,7 +78,7 @@ export default function SchedulePage() {
           <Select
             value={cinemaFilter}
             label="All Cinemas"
-            onChange={(e) => setCinemaFilter(e.target.value)}
+            onChange={(e) => setCinemaFilter(e.target.value as number | '')}
           >
             <MenuItem value="">All Cinemas</MenuItem>
             {cinemas.map((c) => (

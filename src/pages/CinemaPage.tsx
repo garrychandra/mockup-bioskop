@@ -1,6 +1,6 @@
 import {
   Container, Typography, Grid, Card, CardMedia,
-  CardContent, CardActions, Button, Box, Chip, Stack,
+  CardContent, CardActions, Button, Box, Chip, Stack, ChipProps,
 } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import PhoneIcon from '@mui/icons-material/Phone'
@@ -8,7 +8,7 @@ import TheaterComedyIcon from '@mui/icons-material/TheaterComedy'
 import { useNavigate } from 'react-router-dom'
 import { cinemas } from '../data/cinemas'
 
-const FACILITY_COLORS = {
+const FACILITY_COLORS: Record<string, ChipProps['color']> = {
   IMAX: 'primary',
   '4DX': 'secondary',
   'Dolby Atmos': 'info',

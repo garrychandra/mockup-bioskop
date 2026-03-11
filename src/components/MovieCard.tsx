@@ -4,8 +4,9 @@ import {
 } from '@mui/material'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useNavigate } from 'react-router-dom'
+import { Movie } from '../data/movies'
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie }: { movie: Movie }) {
   const navigate = useNavigate()
   const isNowShowing = movie.status === 'now_showing'
 

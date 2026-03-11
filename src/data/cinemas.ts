@@ -1,4 +1,14 @@
-export const cinemas = [
+export type Cinema = {
+  id: number
+  name: string
+  location: string
+  phone: string
+  facilities: string[]
+  totalStudios: number
+  image_url: string
+}
+
+export const cinemas: Cinema[] = [
   {
     id: 1,
     name: 'CINEMAX Grand Indonesia',

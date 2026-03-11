@@ -1,4 +1,18 @@
-export const movies = [
+export type Movie = {
+  id: number
+  title: string
+  genre: string
+  duration_min: number
+  rating: number | null
+  status: 'now_showing' | 'coming_soon'
+  synopsis: string
+  director: string
+  cast: string
+  poster_url: string
+  backdrop_url: string
+}
+
+export const movies: Movie[] = [
   {
     id: 1,
     title: 'Dune: Part Two',

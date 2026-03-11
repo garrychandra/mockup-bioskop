@@ -1,13 +1,13 @@
 import { movies } from './movies'
 import { cinemas } from './cinemas'
 
-function dateStr(offsetDays) {
+function dateStr(offsetDays: number): string {
   const d = new Date()
   d.setDate(d.getDate() + offsetDays)
   return d.toISOString().split('T')[0]
 }
 
-function makeShowtime(date, hour, minute = '00') {
+function makeShowtime(date: string, hour: number, minute = '00'): string {
   return `${date}T${String(hour).padStart(2, '0')}:${minute}:00`
 }
 
@@ -73,3 +73,5 @@ export const schedules = [
     cinema_location: cinema?.location,
   }
 })
+
+export type Schedule = (typeof schedules)[number]
